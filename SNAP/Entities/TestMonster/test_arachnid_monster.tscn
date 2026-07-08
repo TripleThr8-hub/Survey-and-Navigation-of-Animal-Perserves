@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dci41sgbepcvt"]
+
+[ext_resource type="Script" uid="uid://dxi264r1cgew6" path="res://Entities/TestMonster/Scripts/test_monster.gd" id="1_osdw7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_57x2f"]
+albedo_color = Color(0.11331306, 0.11331306, 0.11331304, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_57x2f"]
+material = SubResource("StandardMaterial3D_57x2f")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_osdw7"]
+
+[node name="Test Arachnid Monster" type="CharacterBody3D" unique_id=1272533319]
+script = ExtResource("1_osdw7")
+current_animal_type = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1109485906]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_57x2f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1159584729]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_osdw7")

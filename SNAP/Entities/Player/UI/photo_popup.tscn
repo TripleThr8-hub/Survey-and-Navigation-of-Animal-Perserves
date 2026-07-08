@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bp57ww7uv1x34"]
+
+[ext_resource type="FontFile" uid="uid://vxhttna5tsiw" path="res://Assets/Fonts/Orbitron-VariableFont_wght.ttf" id="1_aqsux"]
+[ext_resource type="Script" uid="uid://dys0wtkp28r6i" path="res://Entities/Player/UI/photo_popup.gd" id="2_y0bxf"]
+
+[sub_resource type="Theme" id="Theme_y0bxf"]
+default_font = ExtResource("1_aqsux")
+
+[sub_resource type="LabelSettings" id="LabelSettings_y0bxf"]
+font_size = 30
+
+[node name="PhotoPopup" type="Control" unique_id=2045335779]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0bxf")
+script = ExtResource("2_y0bxf")
+
+[node name="Label" type="Label" parent="." unique_id=687782944]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_y0bxf")
+horizontal_alignment = 1
+vertical_alignment = 1

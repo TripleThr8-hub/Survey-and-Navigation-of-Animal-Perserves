@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://4s1vh4xeictm"]
+
+[ext_resource type="Script" uid="uid://dxi264r1cgew6" path="res://Entities/TestMonster/Scripts/test_monster.gd" id="1_tnl42"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bv6kk"]
+albedo_color = Color(0.21471909, 0.59646386, 0.3733006, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bv6kk"]
+material = SubResource("StandardMaterial3D_bv6kk")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tnl42"]
+
+[node name="Test Reptile Monster" type="CharacterBody3D" unique_id=43118007 groups=["monsters"]]
+script = ExtResource("1_tnl42")
+current_animal_type = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1696210100]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_bv6kk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2072502008]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_tnl42")
+
+[node name="PhotoPoints" type="Node3D" parent="." unique_id=608776828]
+
+[node name="Head" type="Marker3D" parent="PhotoPoints" unique_id=1371688562]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4557209, 0)
+
+[node name="Chest" type="Marker3D" parent="PhotoPoints" unique_id=2094149532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87172925, 0)
+
+[node name="Center" type="Marker3D" parent="PhotoPoints" unique_id=1879743220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20665479, 0)
+
+[node name="Hip" type="Marker3D" parent="PhotoPoints" unique_id=1639719609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49082062, 0)
+
+[node name="TailBase" type="Marker3D" parent="PhotoPoints" unique_id=1469582993]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.90268433, -1.0010698)
+
+[node name="TailTip" type="Marker3D" parent="PhotoPoints" unique_id=1083260647]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4320452, -1.0010698)

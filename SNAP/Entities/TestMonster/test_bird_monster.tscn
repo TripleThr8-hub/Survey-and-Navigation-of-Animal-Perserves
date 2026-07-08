@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://c0tmtp40f03cv"]
+
+[ext_resource type="Script" uid="uid://dxi264r1cgew6" path="res://Entities/TestMonster/Scripts/test_monster.gd" id="1_g7wqt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pewf2"]
+albedo_color = Color(0.39622197, 0.55927455, 0.9124786, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pewf2"]
+material = SubResource("StandardMaterial3D_pewf2")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g7wqt"]
+
+[node name="Test Bird Monster" type="CharacterBody3D" unique_id=836622881 groups=["monsters"]]
+script = ExtResource("1_g7wqt")
+current_animal_type = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1104837082]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_pewf2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=335136728]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_g7wqt")
+
+[node name="PhotoPoints" type="Node3D" parent="." unique_id=318047288]
+
+[node name="Head" type="Marker3D" parent="PhotoPoints" unique_id=1328946446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4697219, 0)
+
+[node name="Chest" type="Marker3D" parent="PhotoPoints" unique_id=872460267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92925763, 0)
+
+[node name="Center" type="Marker3D" parent="PhotoPoints" unique_id=688553988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36792767, 0)
+
+[node name="Hip" type="Marker3D" parent="PhotoPoints" unique_id=56066985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35548025, 0)
+
+[node name="RightWing" type="Marker3D" parent="PhotoPoints" unique_id=1779940762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.99464154)
+
+[node name="LeftWing" type="Marker3D" parent="PhotoPoints" unique_id=1902176497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9998599)
+
+[node name="RightLeg" type="Marker3D" parent="PhotoPoints" unique_id=1243129127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.308222, 0.9962265)
+
+[node name="LeftLeg" type="Marker3D" parent="PhotoPoints" unique_id=68340948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3068279, -0.9989635)
+
+[node name="TailBase" type="Marker3D" parent="PhotoPoints" unique_id=639271626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0067568, -1.0261108, 0)
+
+[node name="TailTip" type="Marker3D" parent="PhotoPoints" unique_id=867541805]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1744875, -1.3492156, 0)

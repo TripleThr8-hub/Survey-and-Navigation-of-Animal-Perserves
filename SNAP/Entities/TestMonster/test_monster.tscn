@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dgwymvn2834ky"]
+
+[ext_resource type="Script" uid="uid://dxi264r1cgew6" path="res://Entities/TestMonster/Scripts/test_monster.gd" id="1_5r2dr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w0onq"]
+albedo_color = Color(1, 0, 0.44705883, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nanae"]
+material = SubResource("StandardMaterial3D_w0onq")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kjecb"]
+
+[node name="TestMonster" type="CharacterBody3D" unique_id=1018154374 groups=["monsters"]]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_5r2dr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=793281667]
+mesh = SubResource("CapsuleMesh_nanae")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1789436255]
+shape = SubResource("CapsuleShape3D_kjecb")
+
+[node name="PhotoPoint" type="Marker3D" parent="." unique_id=252615025]
