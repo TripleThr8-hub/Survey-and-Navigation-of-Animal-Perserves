@@ -56,6 +56,9 @@ default_font = ExtResource("2_6miq6")
 [sub_resource type="LabelSettings" id="LabelSettings_rul8u"]
 font_size = 25
 
+[sub_resource type="LabelSettings" id="LabelSettings_owvpp"]
+font_size = 8
+
 [node name="Player" type="CharacterBody3D" unique_id=1575118423 node_paths=PackedStringArray("stamina_label", "health_label", "max_stamina_label", "max_health_label", "scout_ui", "photo_amount_label", "camera_ui", "gear_texture", "camera_flash", "popup_container")]
 collision_layer = 2
 collision_mask = 31
@@ -284,6 +287,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CameraFlash" type="ColorRect" parent="CanvasLayer" unique_id=844399344]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -293,7 +297,9 @@ color = Color(0, 0, 0, 1)
 
 [node name="PERFORMANCE_LABEL" type="Label" parent="CanvasLayer" unique_id=1580924587]
 visible = false
+offset_top = 327.0
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 350.0
 text = "100"
+label_settings = SubResource("LabelSettings_owvpp")
 script = ExtResource("13_owvpp")

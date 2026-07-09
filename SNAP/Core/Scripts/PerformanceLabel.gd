@@ -1,7 +1,21 @@
 extends Label
 
+var showing: bool = false
+
+func _ready() -> void:
+	self.visible = false
+	showing = false
 
 func _process(_delta):
+	if Input.is_action_just_pressed("TEMP_SHOW_PERFORMANCE"):
+		if !showing:
+			showing = true
+			self.visible = true
+		elif showing:
+			showing = false
+			self.visible = false
+	
+	
 	var fps = Engine.get_frames_per_second()
 	var frame_time = 1000.0 / fps if fps > 0 else 0
 	
@@ -40,8 +54,6 @@ Static Memory: %.2f MB
 ENGINE
 Time Scale: %.2f
 Physics Ticks: %s
-
-=====================================
 """ % [
 		fps,
 		frame_time,
