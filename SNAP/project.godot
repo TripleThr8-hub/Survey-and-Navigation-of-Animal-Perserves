@@ -15,10 +15,15 @@ run/main_scene="uid://bjiawtne2k8i3"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://c014omrclylsv"
 
+[autoload]
+
+SteamInit="*uid://wvvlpecckaht"
+
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="ignore"
 

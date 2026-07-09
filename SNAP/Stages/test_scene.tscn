@@ -43,7 +43,7 @@ uv2_triplanar = true
 uv2_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_io1bj"]
-albedo_color = Color(0.50196856, 0.5019687, 0.5019687, 1)
+albedo_color = Color(0.31431612, 0.31431612, 0.31431603, 1)
 albedo_texture = ExtResource("3_nsysu")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
