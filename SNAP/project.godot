@@ -111,3 +111,4 @@ initialization/app_data/playtest_id=480
 initialization/app_data/tool_id=480
 initialization/processes/embed_callbacks=false
 multiplayer_peer/max_channels=4
+initialization/processes/initialize_on_startup=false
