@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://brmyjfh8wfh37" path="res://Entities/Player/Textures/GUI/Stamina.png" id="6_aqk3a"]
 [ext_resource type="Texture2D" uid="uid://1gauu562h20c" path="res://Entities/Player/Textures/GUI/Gear.png" id="7_rul8u"]
 [ext_resource type="PackedScene" uid="uid://bp57ww7uv1x34" path="res://Entities/Player/UI/photo_popup.tscn" id="9_lub02"]
+[ext_resource type="Script" uid="uid://b4w3erxn0cntn" path="res://Core/Scripts/PerformanceLabel.gd" id="13_owvpp"]
 
 [sub_resource type="Resource" id="Resource_ap3xn"]
 script = ExtResource("2_x1y6q")
@@ -283,10 +284,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CameraFlash" type="ColorRect" parent="CanvasLayer" unique_id=844399344]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="PERFORMANCE_LABEL" type="Label" parent="CanvasLayer" unique_id=1580924587]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "100"
+script = ExtResource("13_owvpp")
