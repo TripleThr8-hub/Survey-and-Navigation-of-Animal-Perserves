@@ -2,8 +2,9 @@
 
 [ext_resource type="Shader" uid="uid://bbbfj3h5mni3e" path="res://Common/Shaders/CustomSky.tres" id="1_w0onq"]
 [ext_resource type="PackedScene" uid="uid://c0t8jaqaw2vc" path="res://Entities/Player/player.tscn" id="2_nanae"]
-[ext_resource type="Shader" uid="uid://3nv3nmu8n7aa" path="res://Common/Shaders/CelShader.gdshader" id="3_kjecb"]
+[ext_resource type="Texture2D" uid="uid://d1iqhw378r4kw" path="res://addons/kenney_prototype_textures/green/texture_02.png" id="3_nsysu"]
 [ext_resource type="PackedScene" uid="uid://dl6co6d8y5mrn" path="res://Entities/TestMonster/test_mammal_monster.tscn" id="4_nanae"]
+[ext_resource type="Texture2D" uid="uid://bhoy7op2wci07" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="4_nsysu"]
 [ext_resource type="PackedScene" uid="uid://4s1vh4xeictm" path="res://Entities/TestMonster/test_reptile_monster.tscn" id="5_kjecb"]
 [ext_resource type="PackedScene" uid="uid://c0tmtp40f03cv" path="res://Entities/TestMonster/test_bird_monster.tscn" id="6_io1bj"]
 
@@ -33,56 +34,22 @@ sky = SubResource("Sky_ix71e")
 volumetric_fog_length = 49.42
 volumetric_fog_temporal_reprojection_enabled = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a2oev"]
-render_priority = 0
-shader = ExtResource("3_kjecb")
-shader_parameter/albedo = Color(0.26, 0.07019999, 0.07019999, 1)
-shader_parameter/light_bands = 2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nm2tb"]
-render_priority = 0
-shader = ExtResource("3_kjecb")
-shader_parameter/albedo = Color(0.10559999, 0.28069332, 0.32, 1)
-shader_parameter/light_bands = 3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v7bsa"]
-render_priority = 0
-shader = ExtResource("3_kjecb")
-shader_parameter/albedo = Color(0.0744, 0.15685998, 0.31, 1)
-shader_parameter/light_bands = 3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5shub"]
-render_priority = 0
-shader = ExtResource("3_kjecb")
-shader_parameter/albedo = Color(0.086100005, 0.086100005, 0.21, 1)
-shader_parameter/light_bands = 3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ansgv"]
-render_priority = 0
-shader = ExtResource("3_kjecb")
-shader_parameter/albedo = Color(0.38, 0.076, 0.076, 1)
-shader_parameter/light_bands = 3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w61ql"]
-render_priority = 0
-shader = ExtResource("3_kjecb")
-shader_parameter/albedo = Color(0.16470589, 0.22745098, 0.18039216, 1)
-shader_parameter/light_bands = 3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ix71e"]
-render_priority = 0
-shader = ExtResource("3_kjecb")
-shader_parameter/albedo = Color(0.21, 0.0483, 0.059079997, 1)
-shader_parameter/light_bands = 3
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsysu"]
+albedo_texture = ExtResource("4_nsysu")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv2_scale = Vector3(0.25, 0.25, 0.25)
+uv2_triplanar = true
+uv2_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_io1bj"]
-albedo_color = Color(0.8039216, 0.105882354, 0.37254903, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bibav"]
-render_priority = 0
-shader = ExtResource("3_kjecb")
-shader_parameter/albedo = Color(0.08653667, 0.13, 0.0533, 1)
-shader_parameter/light_bands = 3
+albedo_color = Color(0.50196856, 0.5019687, 0.5019687, 1)
+albedo_texture = ExtResource("3_nsysu")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv2_scale = Vector3(0.25, 0.25, 0.25)
+uv2_triplanar = true
+uv2_world_triplanar = true
 
 [node name="TestScene" type="Node3D" unique_id=1734157170]
 
@@ -93,75 +60,47 @@ environment = SubResource("Environment_f0kaw")
 transform = Transform3D(-1, 7.942431e-08, -3.6531098e-08, 0, 0.41786703, 0.9085082, 8.742278e-08, 0.9085082, -0.41786703, 0, 0, 0)
 shadow_enabled = true
 
+[node name="WorldObjects" type="Node3D" parent="." unique_id=701171536]
+
+[node name="OuterWalls" type="Node3D" parent="WorldObjects" unique_id=1292400110]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldObjects/OuterWalls" unique_id=275430923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 50)
+use_collision = true
+collision_mask = 31
+size = Vector3(100, 25, 1)
+material = SubResource("StandardMaterial3D_nsysu")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="WorldObjects/OuterWalls" unique_id=1378455280]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 10, -50)
+use_collision = true
+collision_mask = 31
+size = Vector3(100, 25, 1)
+material = SubResource("StandardMaterial3D_nsysu")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="WorldObjects/OuterWalls" unique_id=1846959171]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 50, 10, 0)
+use_collision = true
+collision_mask = 31
+size = Vector3(100, 25, 1)
+material = SubResource("StandardMaterial3D_nsysu")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="WorldObjects/OuterWalls" unique_id=461694267]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -50, 10, 0)
+use_collision = true
+collision_mask = 31
+size = Vector3(100, 25, 1)
+material = SubResource("StandardMaterial3D_nsysu")
+
+[node name="Floor" type="CSGBox3D" parent="WorldObjects" unique_id=1144725727]
+use_collision = true
+collision_mask = 31
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_io1bj")
+
 [node name="Player" parent="." unique_id=1575118423 instance=ExtResource("2_nanae")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.260234, 2.8008041, -2.1532068)
 crouching_height = -0.1
-
-[node name="Obsicals" type="Node3D" parent="." unique_id=389764910]
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Obsicals" unique_id=1562728414]
-transform = Transform3D(0.9030806, 0, 0.4294711, 0, 1, 0, -0.4294711, 0, 0.9030806, -5.3662434, 3.1030164, 4.091543)
-use_collision = true
-collision_mask = 31
-radius = 2.945
-height = 5.3662148
-sides = 26
-material = SubResource("ShaderMaterial_a2oev")
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Obsicals" unique_id=1043051054]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.956165, 7.893909, -3.6446705)
-use_collision = true
-collision_mask = 31
-radius = 2.945
-height = 14.948
-sides = 7
-material = SubResource("ShaderMaterial_nm2tb")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Obsicals" unique_id=2123893434]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9464271, 0)
-use_collision = true
-collision_mask = 31
-material = SubResource("ShaderMaterial_v7bsa")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Obsicals" unique_id=546551444]
-transform = Transform3D(1, 0, 0, 0, 0.9718871, 0.23544745, 0, -0.23544745, 0.9718871, 10.067802, 5.2504845, 5.5160294)
-use_collision = true
-collision_mask = 31
-size = Vector3(2.5, 11.860706, 2.5)
-material = SubResource("ShaderMaterial_5shub")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="Obsicals" unique_id=793480048]
-transform = Transform3D(-0.88581514, -0.10925663, 0.45099282, 0, 0.97188705, 0.23544744, -0.46403825, 0.20856291, -0.86091226, -0.91010094, 5.219454, -11.382411)
-use_collision = true
-collision_mask = 31
-size = Vector3(2.5, 11.860706, 2.5)
-material = SubResource("ShaderMaterial_ansgv")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="Obsicals" unique_id=1934251801]
-transform = Transform3D(-0.26597688, -0.2269665, 0.9368791, 0, 0.9718871, 0.23544745, -0.96397936, 0.06262352, -0.2584993, 12.021178, 5.2504845, -12.662218)
-use_collision = true
-collision_mask = 31
-size = Vector3(2.5, 11.860706, 2.5)
-material = SubResource("ShaderMaterial_w61ql")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Obsicals" unique_id=2040014602]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8998466, 3.0570655, -4.997527)
-use_collision = true
-collision_mask = 31
-radius = 1.3436185
-material = SubResource("ShaderMaterial_ix71e")
-
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="Obsicals" unique_id=1593628022]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.939384, 1.4980965, -10.52248)
-radius = 3.0616882
-material = SubResource("StandardMaterial3D_io1bj")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=714259505]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15713859, -0.080091, -0.1194973)
-use_collision = true
-collision_mask = 31
-size = Vector3(50, 1, 50)
-material = SubResource("ShaderMaterial_bibav")
 
 [node name="Test Mammal Monster" parent="." unique_id=280836947 instance=ExtResource("4_nanae")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.086278, 2.419909, -5.3953834)
