@@ -23,6 +23,7 @@ func on_host_created() -> void:
 	#Spawn the server player
 	spawn_player(multiplayer.get_unique_id())
 	multiplayer.peer_connected.connect(spawn_player)
+	multiplayer.peer_disconnected.connect(despawn_player)
 
 #The server spawns the player that just connected
 func spawn_player(peer_id: int) -> void:
