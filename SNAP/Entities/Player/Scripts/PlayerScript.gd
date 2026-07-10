@@ -219,14 +219,11 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
-		network_position += network_velocity * delta
-		position = position.lerp(network_position, delta * 10.0)
+		var predicted_position = network_position + network_velocity * 0.05
+		
+		position = position.lerp(predicted_position, delta * 15.0)
 		rotation.y = lerp_angle(rotation.y, network_rotation_y, delta * 15.0)
 		return
-	
-	network_position = position
-	network_rotation_y = rotation.y
-	network_velocity = velocity
 	
 	current_yaw = lerp_angle(
 		current_yaw,
@@ -331,6 +328,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_apply_headbob(delta)
 	_apply_fov(delta, speed)
+	
+	network_position = global_position
+	network_rotation_y = rotation.y
+	network_velocity = velocity
 	
 	photo_amount_label.text = str(current_photo_amount) + " Photos Left"
 
