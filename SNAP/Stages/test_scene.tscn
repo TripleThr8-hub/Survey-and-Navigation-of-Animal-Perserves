@@ -115,11 +115,14 @@ collision_mask = 31
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_io1bj")
 
-[node name="Bird" type="Sprite3D" parent="WorldObjects" unique_id=1521274632]
+[node name="TotallyLegitAndNotStupidStuff" type="Node3D" parent="WorldObjects" unique_id=2085488623]
+visible = false
+
+[node name="Bird" type="Sprite3D" parent="WorldObjects/TotallyLegitAndNotStupidStuff" unique_id=1521274632]
 transform = Transform3D(25, 0, 0, 0, 24.795195, -3.1934924, 0, 3.1934924, 24.795195, 0, 27.026512, -63.821182)
 texture = ExtResource("8_yhd60")
 
-[node name="Permit" type="Sprite3D" parent="WorldObjects" unique_id=1505339782]
+[node name="Permit" type="Sprite3D" parent="WorldObjects/TotallyLegitAndNotStupidStuff" unique_id=1505339782]
 transform = Transform3D(-1.0010663e-06, 10.0255165, 22.901726, 4.3822922e-07, 22.901726, -10.0255165, -25, 0, -1.0927847e-06, -72.67424, 42.503773, 0)
 texture = ExtResource("6_i6baa")
 
