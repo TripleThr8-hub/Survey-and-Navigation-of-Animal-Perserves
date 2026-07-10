@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://baaxjakj3q0iw" path="res://Entities/Player/Scripts/PhotoScorer.gd" id="2_x1y6q"]
 [ext_resource type="Texture2D" uid="uid://cvhj0b1pft5vj" path="res://Entities/Player/Textures/GUI/CornerThingys.png" id="3_8ft5u"]
 [ext_resource type="Texture2D" uid="uid://df3kwf3bwdwl" path="res://Entities/Player/Textures/GUI/Crosshair.png" id="4_5jfoa"]
-[ext_resource type="Script" uid="uid://b0d5x455irncx" path="res://Entities/Player/Scripts/scout_ui.gd" id="4_2147b"]
+[ext_resource type="Script" uid="uid://b0d5x455irncx" path="res://Entities/Player/Scripts/CompassUI.gd" id="4_2147b"]
 [ext_resource type="Script" uid="uid://b3q55robntkcu" path="res://Entities/Player/Scripts/HealthComponent.gd" id="4_iplt1"]
 [ext_resource type="Texture2D" uid="uid://oipiixooo7da" path="res://Entities/Player/Textures/GUI/Health.png" id="5_5j20w"]
 [ext_resource type="Script" uid="uid://d3qy5wolh4xxg" path="res://Entities/Player/Scripts/StaminaComponent.gd" id="5_owvpp"]

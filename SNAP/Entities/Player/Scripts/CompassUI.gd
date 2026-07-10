@@ -19,8 +19,12 @@ func _ready():
 		font = custom_font
 	else:
 		font = ThemeDB.fallback_font
+
 func _process(_delta):
+	if player and not player.is_multiplayer_authority():
+		return
 	queue_redraw()
+
 func _draw():
 	if not player:
 		return

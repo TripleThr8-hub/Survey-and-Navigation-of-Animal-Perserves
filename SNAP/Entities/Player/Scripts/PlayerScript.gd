@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var photo_scorer: PhotoScorer
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var stamina_component: StaminaComponent = $StaminaComponent
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 #Varibles
 @export_group("Movement")
@@ -114,6 +115,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if not is_multiplayer_authority():
 		camera.current = false
+		canvas_layer.visible = false
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		camera.current = true

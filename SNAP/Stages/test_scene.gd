@@ -8,6 +8,7 @@ var bird_activated: bool = false
 
 func _ready() -> void:
 	Networking.host_created.connect(on_host_created)
+	Networking.lobby_entered.connect(func(): canvas_layer.hide())
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Bird-activation"):
@@ -29,6 +30,12 @@ func spawn_player(peer_id: int) -> void:
 	new_player.name = str(peer_id)
 	add_child(new_player)
 	initialize_player(new_player)
+
+func despawn_player(peer_id: int) -> void:
+	var player_node := get_node_or_null(str(peer_id))
+	if player_node:
+		players.erase(player_node)
+		player_node.queue_free()
 
 func initialize_player(player: CharacterBody3D) -> void:
 	player.position = $Spawnpoint.position

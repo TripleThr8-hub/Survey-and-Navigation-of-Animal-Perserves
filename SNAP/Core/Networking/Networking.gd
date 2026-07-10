@@ -1,6 +1,7 @@
 extends Node
 
 signal host_created()
+signal lobby_entered()
 
 var LOBBY_TYPE := Steam.LobbyType.LOBBY_TYPE_FRIENDS_ONLY
 var MAX_MEMBERS := 4
@@ -30,6 +31,7 @@ func on_lobby_created(connect: int, lobby_id: int) -> void:
 		peer.create_host()
 		multiplayer.multiplayer_peer = peer
 		host_created.emit()
+		lobby_entered.emit()
 
 #Called when joining a lobby (after creating the lobby or joining a friend)
 func on_lobby_joined(lobby_id: int, permission: int, locked: bool, response: int) -> void:
@@ -41,6 +43,7 @@ func on_lobby_joined(lobby_id: int, permission: int, locked: bool, response: int
 		peer.server_relay = true
 		peer.create_client(Steam.getLobbyOwner(lobby_id))
 		multiplayer.multiplayer_peer = peer
+		lobby_entered.emit()
 
 #Called when a player is attempting to join from the Steam interface
 func on_join_requested(lobby_id: int, steam_id: int) -> void:
