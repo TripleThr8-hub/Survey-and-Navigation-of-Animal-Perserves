@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c31emuxy3vs8c"]
+
+[ext_resource type="Script" uid="uid://c175mvxdslxml" path="res://Stages/2DTestSceneWILLDELETE/something_lol.gd" id="1_7a1ss"]
+
+[node name="SomethingLol" type="Node2D" unique_id=2144886780]
+script = ExtResource("1_7a1ss")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=68475479]
+
+[node name="Host" type="Button" parent="CanvasLayer" unique_id=1242582857]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Host"
+
+[node name="Spawnpoint" type="Node2D" parent="." unique_id=411457434]
+position = Vector2(613, 293)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1965641586]
+_spawnable_scenes = PackedStringArray("uid://c47bn5tir8isn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="CanvasLayer/Host" to="." method="_on_host_pressed"]
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
