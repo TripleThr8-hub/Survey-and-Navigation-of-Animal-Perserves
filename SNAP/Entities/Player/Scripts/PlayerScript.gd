@@ -7,6 +7,9 @@ extends CharacterBody3D
 @onready var stamina_component: StaminaComponent = $StaminaComponent
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
+@export var network_position: Vector3
+@export var network_rotation_y: float
+
 #Varibles
 @export_group("Movement")
 @export var move_speed: float = 3.5
@@ -215,6 +218,8 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
+		position = position.lerp(network_position, delta * 15.0)
+		rotation.y = lerp_angle(rotation.y, network_rotation_y, delta * 15.0)
 		return
 	
 	current_yaw = lerp_angle(
