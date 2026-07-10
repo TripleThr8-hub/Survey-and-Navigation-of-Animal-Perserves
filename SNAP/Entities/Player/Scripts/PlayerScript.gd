@@ -222,6 +222,9 @@ func _process(delta: float) -> void:
 		rotation.y = lerp_angle(rotation.y, network_rotation_y, delta * 15.0)
 		return
 	
+	network_position = position
+	network_rotation_y = rotation.y
+	
 	current_yaw = lerp_angle(
 		current_yaw,
 		target_yaw,
