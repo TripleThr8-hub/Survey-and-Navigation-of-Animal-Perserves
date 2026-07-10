@@ -316,4 +316,5 @@ label_settings = SubResource("LabelSettings_owvpp")
 script = ExtResource("13_owvpp")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1789502073]
+replication_interval = 0.033
 replication_config = SubResource("SceneReplicationConfig_owvpp")
