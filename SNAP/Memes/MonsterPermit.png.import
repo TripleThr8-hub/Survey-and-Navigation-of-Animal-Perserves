@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c014omrclylsv"
-path.s3tc="res://.godot/imported/StupidBird.png-27a9c6ad3e8cfa8f5f6e14cb797af486.s3tc.ctex"
+uid="uid://b6o12itsbfchv"
+path.s3tc="res://.godot/imported/MonsterPermit.png-f7432493f46c4e14ad6068548ba11dbf.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Memes/StupidBird.png"
-dest_files=["res://.godot/imported/StupidBird.png-27a9c6ad3e8cfa8f5f6e14cb797af486.s3tc.ctex"]
+source_file="res://Memes/MonsterPermit.png"
+dest_files=["res://.godot/imported/MonsterPermit.png-f7432493f46c4e14ad6068548ba11dbf.s3tc.ctex"]
 
 [params]
 

@@ -31,7 +31,7 @@ func _process(_delta):
 	var vertices = Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME)
 	
 	text = """
-========== DIAGNOSTICS ==========
+-------- DIAGNOSTICS --------
 
 PERFORMANCE
 FPS: %s
