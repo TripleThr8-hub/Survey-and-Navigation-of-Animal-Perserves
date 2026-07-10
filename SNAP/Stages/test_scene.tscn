@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dl6co6d8y5mrn" path="res://Entities/TestMonster/test_mammal_monster.tscn" id="4_nanae"]
 [ext_resource type="Texture2D" uid="uid://bhoy7op2wci07" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="4_nsysu"]
 [ext_resource type="PackedScene" uid="uid://4s1vh4xeictm" path="res://Entities/TestMonster/test_reptile_monster.tscn" id="5_kjecb"]
-[ext_resource type="Texture2D" uid="uid://b6o12itsbfchv" path="res://Memes/MonsterPermit.png" id="6_i6baa"]
 [ext_resource type="PackedScene" uid="uid://c0tmtp40f03cv" path="res://Entities/TestMonster/test_bird_monster.tscn" id="6_io1bj"]
 [ext_resource type="Texture2D" uid="uid://c014omrclylsv" path="res://Memes/StupidBird.png" id="8_yhd60"]
 
@@ -115,16 +114,10 @@ collision_mask = 31
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_io1bj")
 
-[node name="TotallyLegitAndNotStupidStuff" type="Node3D" parent="WorldObjects" unique_id=2085488623]
-visible = false
-
-[node name="Bird" type="Sprite3D" parent="WorldObjects/TotallyLegitAndNotStupidStuff" unique_id=1521274632]
+[node name="Bird" type="Sprite3D" parent="WorldObjects" unique_id=1521274632]
 transform = Transform3D(25, 0, 0, 0, 24.795195, -3.1934924, 0, 3.1934924, 24.795195, 0, 27.026512, -63.821182)
+visible = false
 texture = ExtResource("8_yhd60")
-
-[node name="Permit" type="Sprite3D" parent="WorldObjects/TotallyLegitAndNotStupidStuff" unique_id=1505339782]
-transform = Transform3D(-1.0010663e-06, 10.0255165, 22.901726, 4.3822922e-07, 22.901726, -10.0255165, -25, 0, -1.0927847e-06, -72.67424, 42.503773, 0)
-texture = ExtResource("6_i6baa")
 
 [node name="Test Mammal Monster" parent="." unique_id=280836947 instance=ExtResource("4_nanae")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.086278, 2.419909, -5.3953834)

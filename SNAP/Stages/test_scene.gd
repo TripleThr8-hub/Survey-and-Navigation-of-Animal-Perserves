@@ -4,8 +4,19 @@ const PLAYER_CONTROLLER = preload("res://Entities/Player/player.tscn")
 
 var players: Array[CharacterBody3D]
 
+var bird_activated: bool = false
+
 func _ready() -> void:
 	Networking.host_created.connect(on_host_created)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("Bird-activation"):
+		if bird_activated:
+			$WorldObjects/Bird.visible = false
+			bird_activated = false
+		elif !bird_activated:
+			$WorldObjects/Bird.visible = true
+			bird_activated = true
 
 func on_host_created() -> void:
 	#Spawn the server player
