@@ -219,10 +219,10 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
-		var predicted_position = network_position + network_velocity * 0.05
+		var predicted_position = network_position + network_velocity * 0.1
 		
-		position = position.lerp(predicted_position, delta * 15.0)
-		rotation.y = lerp_angle(rotation.y, network_rotation_y, delta * 15.0)
+		position = position.lerp(predicted_position, delta * 8.0)
+		rotation.y = lerp_angle(rotation.y, network_rotation_y, delta * 8.0)
 		return
 	
 	current_yaw = lerp_angle(
