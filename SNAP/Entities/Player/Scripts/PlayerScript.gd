@@ -9,6 +9,7 @@ extends CharacterBody3D
 
 @export var network_position: Vector3
 @export var network_rotation_y: float
+@export var network_velocity: Vector3
 
 #Varibles
 @export_group("Movement")
@@ -218,12 +219,14 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
-		position = position.lerp(network_position, delta * 15.0)
+		network_position += network_velocity * delta
+		position = position.lerp(network_position, delta * 10.0)
 		rotation.y = lerp_angle(rotation.y, network_rotation_y, delta * 15.0)
 		return
 	
 	network_position = position
 	network_rotation_y = rotation.y
+	network_velocity = velocity
 	
 	current_yaw = lerp_angle(
 		current_yaw,
