@@ -108,7 +108,16 @@ enum player_mode {SCOUT, CAMERA}
 var current_mode: player_mode = player_mode.SCOUT
 #endregion
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+
 func _ready() -> void:
+	if not is_multiplayer_authority():
+		camera.current = false
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		camera.current = true
+	
 	scout_ui.modulate = Color("ffb347")
 	camera_ui.modulate = Color("6aaae6")
 	camera_flash.visible = true
@@ -142,6 +151,9 @@ func _ready() -> void:
 	photo_scorer.setup(camera, self, min_fov, max_fov)
 
 func _input(event: InputEvent) -> void:
+	if not is_multiplayer_authority():
+		return
+		
 	if event is InputEventMouseMotion:
 		var sensitivity := mouse_sensitivity
 		
@@ -200,6 +212,9 @@ func _input(event: InputEvent) -> void:
 		add_health(10)
 
 func _process(delta: float) -> void:
+	if not is_multiplayer_authority():
+		return
+	
 	current_yaw = lerp_angle(
 		current_yaw,
 		target_yaw,
@@ -245,6 +260,9 @@ func _process(delta: float) -> void:
 		gear_texture.rotation = gear_rotation_current
 
 func _physics_process(delta: float) -> void:
+	if not is_multiplayer_authority():
+		return
+	
 	low_health_shake_timer -= delta
 	
 	var health_percent := health_component.get_percent()

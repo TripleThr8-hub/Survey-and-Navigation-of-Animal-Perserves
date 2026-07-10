@@ -59,6 +59,14 @@ font_size = 25
 [sub_resource type="LabelSettings" id="LabelSettings_owvpp"]
 font_size = 8
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_owvpp"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Player" type="CharacterBody3D" unique_id=1575118423 node_paths=PackedStringArray("stamina_label", "health_label", "max_stamina_label", "max_health_label", "scout_ui", "photo_amount_label", "camera_ui", "gear_texture", "camera_flash", "popup_container")]
 collision_layer = 2
 collision_mask = 31
@@ -303,3 +311,6 @@ offset_bottom = 350.0
 text = "100"
 label_settings = SubResource("LabelSettings_owvpp")
 script = ExtResource("13_owvpp")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1789502073]
+replication_config = SubResource("SceneReplicationConfig_owvpp")

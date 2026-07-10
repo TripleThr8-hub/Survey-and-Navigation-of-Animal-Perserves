@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bjiawtne2k8i3"]
 
+[ext_resource type="Script" uid="uid://clcjphsgqbpss" path="res://Stages/test_scene.gd" id="1_nsysu"]
 [ext_resource type="Shader" uid="uid://bbbfj3h5mni3e" path="res://Common/Shaders/CustomSky.tres" id="1_w0onq"]
-[ext_resource type="PackedScene" uid="uid://c0t8jaqaw2vc" path="res://Entities/Player/player.tscn" id="2_nanae"]
 [ext_resource type="Texture2D" uid="uid://d1iqhw378r4kw" path="res://addons/kenney_prototype_textures/green/texture_02.png" id="3_nsysu"]
 [ext_resource type="PackedScene" uid="uid://dl6co6d8y5mrn" path="res://Entities/TestMonster/test_mammal_monster.tscn" id="4_nanae"]
 [ext_resource type="Texture2D" uid="uid://bhoy7op2wci07" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="4_nsysu"]
@@ -52,6 +52,21 @@ uv2_triplanar = true
 uv2_world_triplanar = true
 
 [node name="TestScene" type="Node3D" unique_id=1734157170]
+script = ExtResource("1_nsysu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1851160571]
+
+[node name="Host" type="Button" parent="CanvasLayer" unique_id=401863655]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Host"
+
+[node name="Spawnpoint" type="Marker3D" parent="." unique_id=615906132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.328848, 0)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=727713703]
+_spawnable_scenes = PackedStringArray("uid://c0t8jaqaw2vc")
+spawn_path = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1659949062]
 environment = SubResource("Environment_f0kaw")
@@ -98,10 +113,6 @@ collision_mask = 31
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_io1bj")
 
-[node name="Player" parent="." unique_id=1575118423 instance=ExtResource("2_nanae")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.260234, 2.8008041, -2.1532068)
-crouching_height = -0.1
-
 [node name="Test Mammal Monster" parent="." unique_id=280836947 instance=ExtResource("4_nanae")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.086278, 2.419909, -5.3953834)
 
@@ -110,3 +121,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.77696, 2.4199088, 1.011096
 
 [node name="Test Bird Monster" parent="." unique_id=836622881 instance=ExtResource("6_io1bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.43689, 2.4199085, -10.882292)
+
+[connection signal="pressed" from="CanvasLayer/Host" to="." method="_on_host_pressed"]
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

@@ -1,0 +1,34 @@
+extends Node3D
+const PLAYER_CONTROLLER = preload("res://Entities/Player/player.tscn")
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+
+var players: Array[CharacterBody3D]
+
+func _ready() -> void:
+	Networking.host_created.connect(on_host_created)
+
+func on_host_created() -> void:
+	#Spawn the server player
+	spawn_player(multiplayer.get_unique_id())
+	multiplayer.peer_connected.connect(spawn_player)
+
+#The server spawns the player that just connected
+func spawn_player(peer_id: int) -> void:
+	var new_player := PLAYER_CONTROLLER.instantiate() as CharacterBody3D
+	new_player.name = str(peer_id)
+	add_child(new_player)
+	initialize_player(new_player)
+
+func initialize_player(player: CharacterBody3D) -> void:
+	player.position = $Spawnpoint.position
+	for other in players:
+		player.add_collision_exception_with(other)
+	players.append(player)
+
+func _on_host_pressed() -> void:
+	Networking.host_lobby()
+	canvas_layer.hide()
+
+func _on_multiplayer_spawner_spawned(node: Node) -> void:
+	if node is CharacterBody3D:
+		initialize_player(node)
