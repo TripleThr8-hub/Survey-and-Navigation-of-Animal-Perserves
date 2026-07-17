@@ -1,38 +1,14 @@
 [gd_scene format=4 uid="uid://bjiawtne2k8i3"]
 
 [ext_resource type="Script" uid="uid://clcjphsgqbpss" path="res://Stages/TestingScenes/test_scene.gd" id="1_nsysu"]
-[ext_resource type="Shader" uid="uid://bbbfj3h5mni3e" path="res://Common/Shaders/CustomSky.tres" id="1_w0onq"]
+[ext_resource type="Script" uid="uid://c3d02u5etpxgu" path="res://Stages/Bushland/environment_controller.gd" id="2_msmvd"]
 [ext_resource type="Texture2D" uid="uid://duudeqh2qp4l0" path="res://addons/kenney_prototype_textures/green/texture_03.png" id="3_fluwq"]
 [ext_resource type="Script" uid="uid://bfhygl21shbhl" path="res://Stages/TerrainGenerator.gd" id="3_obsqd"]
 
-[sub_resource type="Gradient" id="Gradient_f0kaw"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0.477, 0.619, 0.741)
-colors = PackedColorArray(0.0928, 0.23083995, 0.29, 1, 0.88, 0.88, 0.88, 1, 0.8784314, 0.8784314, 0.8784314, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ix71e"]
-frequency = 0.0068
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5shub"]
-noise = SubResource("FastNoiseLite_ix71e")
-color_ramp = SubResource("Gradient_f0kaw")
-seamless = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_csdio"]
-shader = ExtResource("1_w0onq")
-shader_parameter/tex = SubResource("NoiseTexture2D_5shub")
-
-[sub_resource type="Sky" id="Sky_ix71e"]
-sky_material = SubResource("ShaderMaterial_csdio")
-
-[sub_resource type="Environment" id="Environment_f0kaw"]
-background_mode = 2
-sky = SubResource("Sky_ix71e")
-volumetric_fog_length = 49.42
-volumetric_fog_temporal_reprojection_enabled = false
+[sub_resource type="Environment" id="Environment_c1fcv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msmvd"]
-albedo_color = Color(0.5154903, 0.51549035, 0.51549035, 1)
+albedo_color = Color(0.32703346, 0.32703352, 0.32703343, 1)
 albedo_texture = ExtResource("3_fluwq")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
@@ -80,7 +56,9 @@ _spawnable_scenes = PackedStringArray("uid://c0t8jaqaw2vc")
 spawn_path = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1659949062]
-environment = SubResource("Environment_f0kaw")
+environment = SubResource("Environment_c1fcv")
+script = ExtResource("2_msmvd")
+ambient_light = Color(0.58160836, 0.5816083, 0.5816083, 1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1995944435]
 transform = Transform3D(-1, 7.942431e-08, -3.6531098e-08, 0, 0.41786703, 0.9085082, 8.742278e-08, 0.9085082, -0.41786703, 0, 0, 0)
@@ -90,17 +68,11 @@ shadow_enabled = true
 material_override = SubResource("StandardMaterial3D_msmvd")
 mesh = SubResource("ArrayMesh_c1fcv")
 script = ExtResource("3_obsqd")
-biome_id = "test"
-display_name = "Test"
-base_amplitude_range = null
-base_frequency_range = null
+biome_id = "bushland"
+display_name = "Bushland"
 hills_enabled = true
-hills_amplitude_range = null
-hills_frequency_range = null
 mountains_amplitude_range = null
 mountains_frequency_range = null
-crevasses_amplitude_range = null
-crevasses_frequency_range = null
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Terrain" unique_id=1694317420]
 visible = false

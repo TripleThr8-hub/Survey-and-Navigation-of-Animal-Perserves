@@ -38,14 +38,8 @@ const size := 256.0
 #
 # @export_group("Foliage")
 # @export var foliage: Array[ScatterRule]
-#
-# @export_group("Environment")
-# @export var light_color: Color
-# @export var fog_color: Color
-# @export var ambient_light_color: Color
-# @export var fog_min_range: float
-# @export var fog_max_range: float
 
+@export_group("Other Stuff")
 @export_range(4, 256, 4) var resolution := 32:
 	set(new_resolution):
 		resolution = new_resolution
