@@ -1,31 +1,36 @@
 extends Node3D
 const PLAYER_CONTROLLER = preload("res://Entities/Player/player.tscn")
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var terrain: MeshInstance3D = $Terrain
 
 var players: Array[CharacterBody3D]
-
 var bird_activated: bool = false
+var world_seed: int = 0
 
 func _ready() -> void:
 	Networking.host_created.connect(on_host_created)
 	Networking.lobby_entered.connect(func(): canvas_layer.hide())
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("Bird-activation"):
-		if bird_activated:
-			$WorldObjects/Bird.visible = false
-			bird_activated = false
-		elif !bird_activated:
-			$WorldObjects/Bird.visible = true
-			bird_activated = true
-
 func on_host_created() -> void:
-	#Spawn the server player
+	# Host decides the terrain seed for this session, once.
+	world_seed = randi()
+	terrain.world_seed = world_seed
+
 	spawn_player(multiplayer.get_unique_id())
-	multiplayer.peer_connected.connect(spawn_player)
+	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(despawn_player)
 
-#The server spawns the player that just connected
+func _on_peer_connected(peer_id: int) -> void:
+	# Give the new peer the seed before/with their player spawn,
+	# so anyone joining mid-session still gets identical terrain.
+	rpc_id(peer_id, "receive_world_seed", world_seed)
+	spawn_player(peer_id)
+
+@rpc("authority", "reliable")
+func receive_world_seed(seed_value: int) -> void:
+	world_seed = seed_value
+	terrain.world_seed = seed_value # setter chain regenerates mesh + scatter locally
+
 func spawn_player(peer_id: int) -> void:
 	var new_player := PLAYER_CONTROLLER.instantiate() as CharacterBody3D
 	new_player.name = str(peer_id)
