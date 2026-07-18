@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cvy5uoumwqckx"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_m504n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_672he"]
+albedo_color = Color(0.18128008, 0.32195523, 0.19250041, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1aqvp"]
+
+[node name="TreeTEST" type="StaticBody3D" unique_id=1433278468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1191705848]
+mesh = SubResource("CapsuleMesh_m504n")
+surface_material_override/0 = SubResource("StandardMaterial3D_672he")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1478794552]
+shape = SubResource("CapsuleShape3D_1aqvp")
