@@ -70,7 +70,7 @@ properties/2/path = NodePath(".:network_velocity")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Player" type="CharacterBody3D" unique_id=1575118423 node_paths=PackedStringArray("stamina_label", "health_label", "max_stamina_label", "max_health_label", "scout_ui", "photo_amount_label", "camera_ui", "gear_texture", "camera_flash", "popup_container")]
+[node name="Player" type="CharacterBody3D" unique_id=1575118423 node_paths=PackedStringArray("stamina_label", "health_label", "max_stamina_label", "max_health_label", "scout_ui", "photo_amount_label", "camera_ui", "gear_texture", "camera_flash", "popup_container") groups=["players"]]
 collision_layer = 2
 collision_mask = 31
 script = ExtResource("1_61lih")
@@ -102,10 +102,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot" unique_id=1159065227]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.039871097, 0.2985258)
+visible = false
 light_energy = 2.362
-spot_range = 6.9433064
-spot_angle = 35.848076
-spot_angle_attenuation = 0.2871747
+spot_range = 58.68856
+spot_angle = 30.01806
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1613249256]
 shape = SubResource("CapsuleShape3D_a2oev")

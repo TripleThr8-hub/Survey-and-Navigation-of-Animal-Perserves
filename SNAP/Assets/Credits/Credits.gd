@@ -6,7 +6,6 @@ var credits = [
 		"entries": [
 			{"role": "Lead Developer", "name": "Braxton Biehunko"},
 			{"role": "Creative Producer", "name": "LoverJeff"},
-			{"role": "Creative Director", "name": "Zander Raines"},
 			{"role": "Concept Artist", "name": "Kaiden Clark"}
 		]
 	},
@@ -14,8 +13,7 @@ var credits = [
 	{
 		"title": "Music and Audio",
 		"entries": [
-			{"role": "Lead Composer", "name": "Zander Raines"},
-			{"role": "Sound Design", "name": "Braxton Biehunko"},
+			{"role": "Sound Design", "name": "Braxton Monroe"},
 			#{"role": "Composer", "name": "The people from school who are wanting to make some music for the lobby"}
 		]
 	},

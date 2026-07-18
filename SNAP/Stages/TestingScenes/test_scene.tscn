@@ -2,20 +2,27 @@
 
 [ext_resource type="Script" uid="uid://clcjphsgqbpss" path="res://Stages/TestingScenes/test_scene.gd" id="1_nsysu"]
 [ext_resource type="PackedScene" uid="uid://c2xnyx2c7v18h" path="res://Stages/SkyController.tscn" id="2_fluwq"]
-[ext_resource type="Script" uid="uid://c3d02u5etpxgu" path="res://Stages/Bushland/environment_controller.gd" id="2_msmvd"]
 [ext_resource type="Texture2D" uid="uid://duudeqh2qp4l0" path="res://addons/kenney_prototype_textures/green/texture_03.png" id="3_fluwq"]
 [ext_resource type="Script" uid="uid://bfhygl21shbhl" path="res://Stages/TerrainGenerator.gd" id="3_obsqd"]
 
-[sub_resource type="Environment" id="Environment_c1fcv"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obsqd"]
+sky_top_color = Color(0.10488545, 0.13504013, 0.17272323, 1)
+sky_horizon_color = Color(0.21003869, 0.21245894, 0.21729985, 1)
+ground_bottom_color = Color(0.1852577, 0.15565261, 0.12234444, 1)
+ground_horizon_color = Color(0.42882538, 0.43294847, 0.4399743, 1)
+
+[sub_resource type="Sky" id="Sky_c1fcv"]
+sky_material = SubResource("ProceduralSkyMaterial_obsqd")
+
+[sub_resource type="Environment" id="Environment_msmvd"]
+background_mode = 2
+sky = SubResource("Sky_c1fcv")
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.2681376, 0.26813766, 0.26813754, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msmvd"]
-albedo_color = Color(0.32703346, 0.32703352, 0.32703343, 1)
+albedo_color = Color(0.08243931, 0.15424159, 0, 1)
 albedo_texture = ExtResource("3_fluwq")
-uv1_scale = Vector3(0.5, 0.5, 0.5)
-uv1_triplanar = true
-uv2_scale = Vector3(0.5, 0.5, 0.5)
-uv2_triplanar = true
-uv2_world_triplanar = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_msmvd"]
 _surfaces = [{
@@ -42,15 +49,11 @@ albedo_color = Color(1, 1, 1, 0)
 [node name="TestScene" type="Node3D" unique_id=1734157170]
 script = ExtResource("1_nsysu")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1659949062]
-environment = SubResource("Environment_c1fcv")
-script = ExtResource("2_msmvd")
-fog_enabled = false
-fog_color = Color(0.28229284, 0.32215956, 0.2422035, 1)
-ambient_light = Color(0.58160836, 0.5816083, 0.5816083, 1)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2028050633]
+environment = SubResource("Environment_msmvd")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1995944435]
-transform = Transform3D(-1, 7.942431e-08, -3.6531098e-08, 0, 0.41786703, 0.9085082, 8.742278e-08, 0.9085082, -0.41786703, 0, 0, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=460376590]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
 [node name="SkyController" parent="." unique_id=2088579008 instance=ExtResource("2_fluwq")]
