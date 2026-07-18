@@ -70,6 +70,30 @@ const size := 256.0
 # @export var fog_min_range: float
 # @export var fog_max_range: float
 
+# Flattens a soft area around a spawn position so players don't land on
+# a slope or inside a rock. Blend Radius fades it back into the normal
+# terrain gradually, so it doesn't read as an obvious flat disc.
+@export_group("Spawn Point")
+@export var spawn_position := Vector2.ZERO:
+	set(new_pos):
+		spawn_position = new_pos
+		update_mesh()
+@export var spawn_height := 0.0:
+	set(new_height):
+		spawn_height = new_height
+		update_mesh()
+## Fully flat inside this radius.
+@export_range(0.0, 64.0, 0.5) var spawn_flatten_radius := 6.0:
+	set(new_radius):
+		spawn_flatten_radius = new_radius
+		update_mesh()
+## Extra distance beyond the flatten radius over which it smoothly blends
+## back into normal terrain - bigger = more gradual, less noticeable.
+@export_range(0.0, 64.0, 0.5) var spawn_blend_radius := 14.0:
+	set(new_radius):
+		spawn_blend_radius = new_radius
+		update_mesh()
+
 @export_group("Other Stuff")
 @export_range(4, 256, 4) var resolution := 32:
 	set(new_resolution):
@@ -156,7 +180,20 @@ func get_height(x: float, y: float) -> float:
 	if crevasses_enabled:
 		_crevasses_noise.frequency = _crevasses_frequency
 		h += _crevasses_noise.get_noise_2d(x, y) * _crevasses_amplitude
-	return h * height_multiplier
+	h *= height_multiplier
+
+	var dist := Vector2(x, y).distance_to(spawn_position)
+	var flatten_total := spawn_flatten_radius + spawn_blend_radius
+	if dist < flatten_total:
+		var t := 1.0
+		if spawn_blend_radius > 0.0:
+			t = clamp((dist - spawn_flatten_radius) / spawn_blend_radius, 0.0, 1.0)
+		elif dist < spawn_flatten_radius:
+			t = 0.0
+		t = smoothstep(0.0, 1.0, t)
+		h = lerp(spawn_height, h, t)
+
+	return h
 
 func get_normal(x: float, y: float) -> Vector3:
 	var epsilon := size / resolution
@@ -247,6 +284,9 @@ func _scatter_structure(def: StructureDefinition, index: int, placed_positions: 
 			var pz := z + rng.randf_range(0.0, def.cell_size)
 
 			if px < half and pz < half and rng.randf() <= def.density:
+				if Vector2(px, pz).distance_to(spawn_position) < spawn_flatten_radius:
+					z += def.cell_size
+					continue
 				var h := get_height(px, pz)
 				if h >= def.min_height and h <= def.max_height:
 					var normal := get_normal(px, pz)
@@ -295,6 +335,9 @@ func _scatter_mesh(m: Mesh, index: int) -> void:
 			var pz := z + rng.randf_range(0.0, foliage_cell_size)
 
 			if px < half and pz < half and rng.randf() <= foliage_density:
+				if Vector2(px, pz).distance_to(spawn_position) < spawn_flatten_radius:
+					z += foliage_cell_size
+					continue
 				var h := get_height(px, pz)
 				if h >= foliage_min_height and h <= foliage_max_height:
 					var normal := get_normal(px, pz)
