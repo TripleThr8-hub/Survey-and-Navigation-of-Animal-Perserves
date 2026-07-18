@@ -36,32 +36,32 @@ void vertex()
 void fragment()
 {
 	vec2 scroll_offset = normalize(scroll_direction) * TIME * scroll_speed;
-
+	
 	vec2 uv = vec2(world_position.x, world_position.z) * cloud_scale + scroll_offset;
 	float density = texture(noise_texture, uv).r;
 	density = pow(clamp(density, 0.0, 1.0), cloud_contrast);
-
+	
 	float dist_from_center = length(local_xz);
 	float radial_mask = 1.0 - smoothstep(radial_inner, radial_outer, dist_from_center);
 	density *= radial_mask;
-
+	
 	vec3 color = sky_color;
 	color = mix(color, cloud_dark, smoothstep(0.25, 0.42, density));
 	color = mix(color, cloud_mid, smoothstep(0.42, 0.6, density));
 	color = mix(color, cloud_bright, smoothstep(0.78, 0.92, density));
-
+	
 	// Accent noise scrolls too, at the same offset, so red/teal move with the clouds
 	vec2 accent_uv = vec2(world_position.x, world_position.z) * accent_scale + scroll_offset;
 	float accent_noise = texture(noise_texture, accent_uv).r;
-
+	
 	float in_cloud = smoothstep(0.32, 0.55, density);
-
+	
 	float teal_amount = (1.0 - smoothstep(0.3, 0.45, accent_noise)) * in_cloud * accent_strength;
 	float red_amount = smoothstep(0.55, 0.7, accent_noise) * in_cloud * accent_strength;
-
+	
 	color = mix(color, cloud_teal, teal_amount);
 	color = mix(color, cloud_red, red_amount);
-
+	
 	ALBEDO = color;
 	ALPHA = smoothstep(alpha_start, alpha_end, density);
 }
