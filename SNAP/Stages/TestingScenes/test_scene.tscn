@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clcjphsgqbpss" path="res://Stages/TestingScenes/test_scene.gd" id="1_nsysu"]
 [ext_resource type="Shader" uid="uid://dwy418sl2wfvd" path="res://Core/SkyController.gdshader" id="2_c1fcv"]
-[ext_resource type="Texture2D" uid="uid://duudeqh2qp4l0" path="res://addons/kenney_prototype_textures/green/texture_03.png" id="3_fluwq"]
+[ext_resource type="Texture2D" uid="uid://davvf55075y4r" path="res://Common/Cartoon_green_texture_grass.jpg" id="3_c1fcv"]
 [ext_resource type="Script" uid="uid://bfhygl21shbhl" path="res://Stages/TerrainGenerator.gd" id="3_obsqd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obsqd"]
@@ -53,8 +53,12 @@ shader_parameter/scroll_direction = Vector2(1, 0.3)
 shader_parameter/scroll_speed = 0.004
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msmvd"]
-albedo_color = Color(0.08243931, 0.15424159, 0, 1)
-albedo_texture = ExtResource("3_fluwq")
+albedo_color = Color(0.2953409, 0.2953411, 0.29534099, 1)
+albedo_texture = ExtResource("3_c1fcv")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv2_triplanar = true
+uv2_world_triplanar = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_tu6xp"]
 _surfaces = [{
@@ -81,13 +85,14 @@ albedo_color = Color(1, 1, 1, 0)
 [node name="TestScene" type="Node3D" unique_id=1734157170]
 script = ExtResource("1_nsysu")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=797691372]
+transform = Transform3D(-0.8660254, -0.50000006, -2.1855696e-08, 0, -4.371139e-08, 1, -0.50000006, 0.8660254, 3.7855173e-08, 0, 0, 0)
+light_color = Color(0.479555, 0.479555, 0.479555, 1)
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2028050633]
 environment = SubResource("Environment_msmvd")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=460376590]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
-sky_mode = 1
 
 [node name="SkyController" type="MeshInstance3D" parent="." unique_id=297350177]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 150, 0)
