@@ -10,15 +10,15 @@ uniform vec3 cloud_red : source_color = vec3(0.55, 0.1, 0.1);
 uniform vec3 cloud_teal : source_color = vec3(0.2, 0.45, 0.45);
 
 uniform float cloud_scale : hint_range(0.001, 0.05) = 0.005;
-uniform float cloud_contrast : hint_range(0.5, 3.0) = 1.3;
-uniform float accent_scale : hint_range(0.001, 0.05) = 0.013;
+uniform float cloud_contrast : hint_range(0.5, 3.0) = 0.995;
+uniform float accent_scale : hint_range(0.001, 0.05) = 0.008;
 uniform float accent_strength : hint_range(0.0, 1.0) = 0.6;
 
-uniform float radial_inner : hint_range(0.0, 200.0) = 30.0;
-uniform float radial_outer : hint_range(0.0, 700.0) = 130.0;
+uniform float radial_inner : hint_range(0.0, 200.0) = 145.0;
+uniform float radial_outer : hint_range(0.0, 700.0) = 700.0;
 
 uniform float alpha_start : hint_range(0.0, 1.0) = 0.15;
-uniform float alpha_end : hint_range(0.0, 1.0) = 0.5;
+uniform float alpha_end : hint_range(0.0, 1.0) = 0.65;
 
 // Drift controls -- direction + speed the clouds slowly scroll on their own
 uniform vec2 scroll_direction = vec2(1.0, 0.3);
