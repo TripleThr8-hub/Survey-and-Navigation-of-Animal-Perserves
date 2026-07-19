@@ -1,37 +1,6 @@
 @tool
 extends MeshInstance3D
-const size := 256.0
-
-@export_group("Structures")
-## One entry per structure type - click + to add another, then fill in
-## its Identity/Placement/Distribution/Terrain/Overlap Rules.
-@export var structures: Array[StructureDefinition]:
-	set(new_structures):
-		structures = new_structures
-		_rescatter()
-
-# Same idea as Structures above, but meshes only (no collision) - for
-# pure decoration like grass, small rocks, background trees. Click + to
-# add another mesh slot.
-@export_group("Foliage")
-@export var foliage_meshes: Array[Mesh] = []:
-	set(new_meshes):
-		foliage_meshes = new_meshes
-		_rescatter()
-
-## Base probability an eligible cell spawns an instance (0-1)
-@export_range(0.0, 1.0, 0.01) var foliage_density := 0.1
-## Grid spacing for candidate points - smaller = denser possible packing, more cost
-@export_range(0.5, 32.0, 0.5) var foliage_cell_size := 4.0
-@export var foliage_min_height := -1000.0
-@export var foliage_max_height := 1000.0
-@export_range(0.0, 90.0, 1.0) var foliage_min_slope_deg := 0.0
-@export_range(0.0, 90.0, 1.0) var foliage_max_slope_deg := 45.0
-@export var foliage_scale_range := Vector2(0.8, 1.2)
-@export var foliage_random_y_rotation := true
-
-@export var biome_id: String
-@export var display_name: String
+const size := 320.0
 
 # Each category now has a min/max range instead of a fixed number. The
 # actual value used each generation is rolled randomly from that range,
@@ -93,6 +62,37 @@ const size := 256.0
 	set(new_radius):
 		spawn_blend_radius = new_radius
 		update_mesh()
+
+@export_group("Structures")
+## One entry per structure type - click + to add another, then fill in
+## its Identity/Placement/Distribution/Terrain/Overlap Rules.
+@export var structures: Array[StructureDefinition]:
+	set(new_structures):
+		structures = new_structures
+		_rescatter()
+
+# Same idea as Structures above, but meshes only (no collision) - for
+# pure decoration like grass, small rocks, background trees. Click + to
+# add another mesh slot.
+@export_group("Foliage")
+@export var foliage_meshes: Array[Mesh] = []:
+	set(new_meshes):
+		foliage_meshes = new_meshes
+		_rescatter()
+
+## Base probability an eligible cell spawns an instance (0-1)
+@export_range(0.0, 1.0, 0.01) var foliage_density := 0.1
+## Grid spacing for candidate points - smaller = denser possible packing, more cost
+@export_range(0.5, 32.0, 0.5) var foliage_cell_size := 4.0
+@export var foliage_min_height := -1000.0
+@export var foliage_max_height := 1000.0
+@export_range(0.0, 90.0, 1.0) var foliage_min_slope_deg := 0.0
+@export_range(0.0, 90.0, 1.0) var foliage_max_slope_deg := 45.0
+@export var foliage_scale_range := Vector2(0.8, 1.2)
+@export var foliage_random_y_rotation := true
+
+@export var biome_id: String
+@export var display_name: String
 
 @export_group("Other Stuff")
 @export_range(4, 256, 4) var resolution := 32:

@@ -100,12 +100,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=603017294]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot" unique_id=1159065227]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.039871097, 0.2985258)
-light_energy = 2.362
-spot_range = 17.250895
-spot_angle = 30.01806
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1613249256]
 shape = SubResource("CapsuleShape3D_a2oev")
 debug_color = Color(0.181227, 0.59484255, 0.67605305, 0.41960785)
