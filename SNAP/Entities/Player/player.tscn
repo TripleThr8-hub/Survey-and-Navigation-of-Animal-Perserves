@@ -229,6 +229,11 @@ script = ExtResource("4_2147b")
 player = NodePath("../../../..")
 custom_font = ExtResource("2_6miq6")
 
+[node name="Cords frfr" type="Label" parent="CanvasLayer/HUD/ScoutUI" unique_id=836096206]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 21.0
+
 [node name="CameraUI" type="Control" parent="CanvasLayer/HUD" unique_id=690177985]
 layout_mode = 1
 anchors_preset = 15

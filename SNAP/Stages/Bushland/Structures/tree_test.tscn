@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://cvy5uoumwqckx"]
 
-[ext_resource type="Texture2D" uid="uid://c014omrclylsv" path="res://Memes/StupidBird.png" id="1_672he"]
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_m504n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_672he"]
-albedo_texture = ExtResource("1_672he")
+albedo_color = Color(0.1254902, 0.2784314, 0.14509805, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1aqvp"]
 

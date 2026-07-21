@@ -1,12 +1,7 @@
 @tool
 extends MeshInstance3D
-const size := 320.0
+const size := 448.0
 
-# Each category now has a min/max range instead of a fixed number. The
-# actual value used each generation is rolled randomly from that range,
-# seeded off world_seed - so the same biome (same categories active,
-# same rough character) still looks meaningfully different every time
-# Host is clicked, instead of just shifting the same shapes around.
 @export_group("Base")
 @export var base_enabled: bool = true
 @export var base_amplitude_range := Vector2(2.0, 6.0)
