@@ -8,11 +8,12 @@ albedo_color = Color(0.1254902, 0.2784314, 0.14509805, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1aqvp"]
 
 [node name="TreeTEST" type="StaticBody3D" unique_id=1433278468]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1191705848]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_m504n")
 surface_material_override/0 = SubResource("StandardMaterial3D_672he")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1478794552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_1aqvp")
