@@ -19,6 +19,7 @@ sky_material = SubResource("ProceduralSkyMaterial_obsqd")
 [sub_resource type="Environment" id="Environment_msmvd"]
 background_mode = 2
 sky = SubResource("Sky_c1fcv")
+ssr_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0.23921569, 0.29803923, 0.16470589, 1)
 

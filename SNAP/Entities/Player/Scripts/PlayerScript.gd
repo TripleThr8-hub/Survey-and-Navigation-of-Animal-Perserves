@@ -115,8 +115,6 @@ var shake_tween: Tween
 @export var min_fov := 30.0
 @export var max_fov := 75.0
 
-@onready var cords_frfr: Label = $"CanvasLayer/HUD/ScoutUI/Cords frfr"
-
 
 var gear_rotation_current := 0.0
 var gear_rotation_target := 0.0
@@ -362,7 +360,6 @@ func _physics_process(delta: float) -> void:
 	
 	photo_amount_label.text = str(current_photo_amount) + " Photos Left"
 	
-	cords_frfr.text = "X: " + str(int(position.x)) + ", Z: " + str(int(position.z))
 
 func _apply_headbob(delta: float) -> void:
 	var flat_speed := Vector3(velocity.x, 0.0, velocity.z).length()
