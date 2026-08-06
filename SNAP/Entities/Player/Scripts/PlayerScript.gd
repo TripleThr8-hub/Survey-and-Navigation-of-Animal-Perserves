@@ -51,6 +51,20 @@ var bob_intensity: float = 0.0
 var original_cam_pos: Vector3
 var original_pivot_pos: Vector3
 
+@export_group("Idle Camera Drift")
+@export var idle_delay: float = 1.5
+@export var idle_drift_strength: float = 0.012
+@export var idle_pitch_ratio: float = 0.5
+
+@export var idle_drift_speed: float = 0.6
+@export var idle_blend_speed: float = 2.5
+@export var mouse_motion_threshold: float = 0.5
+
+var mouse_idle_timer: float = 0.0
+var idle_blend: float = 0.0
+var idle_noise: FastNoiseLite
+var idle_noise_time: float = 0.0
+
 @export_group("Sway")
 @export var sway_amount := 0.0
 @export var sway_target := 0.0
@@ -138,6 +152,11 @@ func _ready() -> void:
 	camera.fov = base_fov
 	update_player_ui()
 	
+	idle_noise = FastNoiseLite.new()
+	idle_noise.seed = randi()
+	idle_noise.frequency = 1.0
+	idle_noise.fractal_octaves = 2
+	
 	target_yaw = rotation.y
 	current_yaw = rotation.y
 	
@@ -147,6 +166,7 @@ func _ready() -> void:
 	target_fov = base_fov
 	
 	camera_zoom_fov = base_fov
+	
 	
 	health_component.health_changed.connect(_on_health_changed)
 	health_component.died.connect(die)
@@ -179,6 +199,9 @@ func _input(event: InputEvent) -> void:
 			-sway_max,
 			sway_max
 		)
+		
+		if event.relative.length() > mouse_motion_threshold:
+			mouse_idle_timer = 0.0
 	
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -241,7 +264,6 @@ func _process(delta: float) -> void:
 	)
 	
 	rotation.y = current_yaw
-	camera_pivot.rotation.x = current_pitch
 	
 	sway_amount = lerp(sway_amount, sway_target, delta * 15.0)
 	sway_target = lerp(sway_target, 0.0, delta * sway_return_speed)
@@ -257,6 +279,8 @@ func _process(delta: float) -> void:
 		target_height,
 		delta * 10
 	)
+	
+	_apply_idle_drift(delta)
 	
 	if current_mode == player_mode.CAMERA:
 		target_fov = camera_zoom_fov
@@ -358,6 +382,20 @@ func _apply_fov(delta: float, current_speed: float) -> void:
 	if current_mode != player_mode.CAMERA:
 		target_fov = lerp(target_fov, speed_fov, delta * 2.0)
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
+
+func _apply_idle_drift(delta: float) -> void:
+	mouse_idle_timer += delta
+	
+	var idle_target_blend := 1.0 if mouse_idle_timer >= idle_delay else 0.0
+	idle_blend = lerp(idle_blend, idle_target_blend, delta * idle_blend_speed)
+	
+	idle_noise_time += delta * idle_drift_speed
+	
+	var yaw_offset := idle_noise.get_noise_1d(idle_noise_time) * idle_drift_strength * idle_blend
+	var pitch_offset := idle_noise.get_noise_1d(idle_noise_time + 500.0) * idle_drift_strength * idle_pitch_ratio * idle_blend
+	
+	camera_pivot.rotation.y = yaw_offset
+	camera_pivot.rotation.x = current_pitch + pitch_offset
 
 func update_player_ui():
 	scout_ui.visible = current_mode == player_mode.SCOUT
