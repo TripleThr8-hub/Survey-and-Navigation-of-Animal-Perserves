@@ -52,15 +52,13 @@ var original_cam_pos: Vector3
 var original_pivot_pos: Vector3
 
 @export_group("Idle Camera Drift")
-@export var idle_delay: float = 1.5
 @export var idle_drift_strength: float = 0.012
 @export var idle_pitch_ratio: float = 0.5
 
 @export var idle_drift_speed: float = 0.6
-@export var idle_blend_speed: float = 2.5
-@export var mouse_motion_threshold: float = 0.5
 
-var mouse_idle_timer: float = 0.0
+@export var idle_roll_ratio: float = 0.4
+
 var idle_blend: float = 0.0
 var idle_noise: FastNoiseLite
 var idle_noise_time: float = 0.0
@@ -198,8 +196,6 @@ func _input(event: InputEvent) -> void:
 			sway_max
 		)
 		
-		if event.relative.length() > mouse_motion_threshold:
-			mouse_idle_timer = 0.0
 	
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -381,18 +377,15 @@ func _apply_fov(delta: float, current_speed: float) -> void:
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 
 func _apply_idle_drift(delta: float) -> void:
-	mouse_idle_timer += delta
-	
-	var idle_target_blend := 1.0 if mouse_idle_timer >= idle_delay else 0.0
-	idle_blend = lerp(idle_blend, idle_target_blend, delta * idle_blend_speed)
-	
 	idle_noise_time += delta * idle_drift_speed
 	
-	var yaw_offset := idle_noise.get_noise_1d(idle_noise_time) * idle_drift_strength * idle_blend
-	var pitch_offset := idle_noise.get_noise_1d(idle_noise_time + 500.0) * idle_drift_strength * idle_pitch_ratio * idle_blend
+	var yaw_offset := idle_noise.get_noise_1d(idle_noise_time) * idle_drift_strength
+	var pitch_offset := idle_noise.get_noise_1d(idle_noise_time + 500.0) * idle_drift_strength * idle_pitch_ratio
+	var roll_offset := idle_noise.get_noise_1d(idle_noise_time + 1000.0) * idle_drift_strength * idle_roll_ratio
 	
 	camera_pivot.rotation.y = yaw_offset
 	camera_pivot.rotation.x = current_pitch + pitch_offset
+	camera_pivot.rotation.z = roll_offset
 
 func update_player_ui():
 	scout_ui.visible = current_mode == player_mode.SCOUT

@@ -76,6 +76,7 @@ collision_mask = 31
 script = ExtResource("1_61lih")
 photo_scorer = SubResource("Resource_ap3xn")
 mouse_sensitivity = 0.004
+idle_drift_strength = 0.02
 camera_lag_speed = 15.0
 stamina_label = NodePath("CanvasLayer/HUD/ScoutUI/VBoxContainer/StaminaLabel")
 health_label = NodePath("CanvasLayer/HUD/ScoutUI/VBoxContainer/HealthLabel")
