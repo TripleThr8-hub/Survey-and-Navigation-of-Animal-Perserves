@@ -69,7 +69,7 @@ var idle_noise_time: float = 0.0
 @export var sway_strength := 0.0015
 @export var sway_max := 0.05
 @export var sway_return_speed := 8.0
-@export var camera_lag_speed := 12.0
+@export var camera_lag_speed := 15.0
 
 @export var camera_move_speed := 1.0
 @export var camera_sensitivity_divider := 2.0
