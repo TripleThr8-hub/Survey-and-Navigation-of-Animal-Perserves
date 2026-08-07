@@ -52,11 +52,11 @@ var original_cam_pos: Vector3
 var original_pivot_pos: Vector3
 
 @export_group("Idle Camera Drift")
-@export var idle_drift_strength: float = 0.012
+@export_range(0.0, 2.0, 0.05) var camera_noise: float = 1.0
+
+@export var idle_drift_strength: float = 0.02
 @export var idle_pitch_ratio: float = 0.5
-
 @export var idle_drift_speed: float = 0.6
-
 @export var idle_roll_ratio: float = 0.4
 
 var idle_blend: float = 0.0
@@ -379,9 +379,9 @@ func _apply_fov(delta: float, current_speed: float) -> void:
 func _apply_idle_drift(delta: float) -> void:
 	idle_noise_time += delta * idle_drift_speed
 	
-	var yaw_offset := idle_noise.get_noise_1d(idle_noise_time) * idle_drift_strength
-	var pitch_offset := idle_noise.get_noise_1d(idle_noise_time + 500.0) * idle_drift_strength * idle_pitch_ratio
-	var roll_offset := idle_noise.get_noise_1d(idle_noise_time + 1000.0) * idle_drift_strength * idle_roll_ratio
+	var yaw_offset := idle_noise.get_noise_1d(idle_noise_time) * idle_drift_strength * camera_noise
+	var pitch_offset := idle_noise.get_noise_1d(idle_noise_time + 500.0) * idle_drift_strength * idle_pitch_ratio * camera_noise
+	var roll_offset := idle_noise.get_noise_1d(idle_noise_time + 1000.0) * idle_drift_strength * idle_roll_ratio * camera_noise
 	
 	camera_pivot.rotation.y = yaw_offset
 	camera_pivot.rotation.x = current_pitch + pitch_offset
